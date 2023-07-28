@@ -2,6 +2,8 @@ import { JSXElementConstructor, ReactElement, lazy } from "react";
 import { Outlet, useRoutes } from "react-router-dom";
 
 const Layout = lazy(() => import("./components/Layout"));
+const Login = lazy(() => import("./pages/Login"));
+const GetHired = lazy(() => import("./pages/Company/GetHired"));
 const Employee = lazy(() => import("./pages/Company/DoHire/Employee"));
 
 export default function PublicRoutes(): ReactElement<
@@ -22,6 +24,14 @@ export default function PublicRoutes(): ReactElement<
           element: <Outlet />,
           children: [
             {
+              path: "dashboard",
+              element: <h1>Dashboard</h1>,
+            },
+            {
+              path: "employee/get-hired",
+              element: <GetHired />,
+            },
+            {
               path: "employee/hire",
               element: <Employee />,
             },
@@ -31,7 +41,7 @@ export default function PublicRoutes(): ReactElement<
     },
     {
       path: "/login",
-      element: <h1>Login</h1>,
+      element: <Login />,
     },
     {
       path: "/signup",
