@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { Box, Stack, Paper, Button, Typography } from "@mui/material";
+
 import InputTypeTextAndEmail from "../../components/Reuseable/Inputcomp";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { storeLoginToken } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../redux/api/api";
 
 const StyledForm = styled.form`
   label {
@@ -34,6 +36,7 @@ const email = "email";
 function AdminLoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [tryLogin] = useLoginMutation()
   const {
     watch,
     control,
@@ -71,9 +74,6 @@ function AdminLoginPage() {
         <Paper elevation={2} sx={paperStyle}>
           <Box sx={loginDiv}>
             <Stack spacing={1} sx={{ mb: 3 }} alignItems="center">
-              {/* <Stack width="4rem" sx={{ mb: 2 }}>
-                <img src={adminLogo} />
-              </Stack> */}
               <Typography
                 variant="h1"
                 sx={{
@@ -87,16 +87,20 @@ function AdminLoginPage() {
 
             <StyledForm
               noValidate
-              onSubmit={handleSubmit((data) => {
-                console.log(data);
-                dispatch(
-                  storeLoginToken({
-                    token: btoa(`${data?.email}:${data?.password}`),
-                    isAdmin: data?.email === "admin@demo.com",
-                  })
-                );
+              onSubmit={handleSubmit(async (data) => {
+                const res: any = await tryLogin({body: data}).unwrap()
+                if (res?.status === 200) {
+                  dispatch(
+                    storeLoginToken({
+                      token: res?.data.authToken,
+                      isAdmin: data?.email === "anshul@yopmail.com",
+                    })
+                  );
+                  navigate('/');
+                } else {
+                  navigate('/');
+                }
                 reset();
-                navigate("/");
               })}
             >
               <Stack spacing={2}>

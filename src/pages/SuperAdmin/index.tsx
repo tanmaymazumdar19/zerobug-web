@@ -8,8 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-import OutlinedCancel from '@mui/icons-material/CancelOutlined'
-import CheckOutlined from '@mui/icons-material/CheckOutlined'
+import OutlinedCancel from '@mui/icons-material/CancelOutlined';
+import CheckOutlined from '@mui/icons-material/CheckOutlined';
+import { useNavigate } from 'react-router-dom';
 
 interface Column {
   id: 'name' | 'email' | 'industry' | 'status' | 'year';
@@ -28,6 +29,7 @@ const columns: readonly Column[] = [
 ];
 
 interface Data {
+  id: number;
   name: string;
   email: string;
   industry: string;
@@ -42,7 +44,7 @@ function createData(
   status: boolean,
   year: string
 ): Data {
-  return { name, email, industry, status, year };
+  return { id: parseInt(`${Math.random()*10000000}`), name, email, industry, status, year };
 }
 
 const rows = [
@@ -151,6 +153,7 @@ const rows = [
 const AdminPage = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const navigate = useNavigate()
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -160,6 +163,10 @@ const AdminPage = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const onOpenCompanyDetails = (id: number) => {
+    navigate(`/admin/${id}`)
+  }
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -182,7 +189,7 @@ const AdminPage = () => {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.email}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => onOpenCompanyDetails(row?.id)} sx={{ cursor: 'pointer' }}>
                   {columns.map((column: any) => (
                     <TableCell key={column.id} align={column.align}>
                       {column.id === 'status' ? row[column.id] ? <OutlinedCancel color='error' /> : <CheckOutlined color='success' /> : row[column.id]}
