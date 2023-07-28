@@ -26,7 +26,7 @@ function AdminLoginPage() {
     alignItems: "center",
     justifyContent: "center",
     height: "100vh",
-    width: "100vw",
+    width: "100%",
   };
 
   const loginDiv = {
