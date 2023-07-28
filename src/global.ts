@@ -9,9 +9,9 @@ export const baseQuery = fetchBaseQuery({
   baseUrl: apiRoot,
   prepareHeaders: (headers: any, { getState }: any) => {
     const token: any = (getState() as RootState).authSlice.userToken
-    // if (token) {
-    //   headers.set('AuthorizationToken', token)
-    // }
+    if (token) {
+      headers.set('AuthorizationToken', token)
+    }
     return headers
   },
 })
@@ -20,11 +20,11 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   args,
   api,
   extraOptions,
-): any => {
+): Promise<any> => {
   const result: any = await baseQuery(args, api, extraOptions)
 
   if (result?.error?.data) {
-    const responseCode: any = result.error.data
+    // const responseCode: any = result.error.data
     // if (responseCode.code === 509) {
     //   api.dispatch(logoutAction(''))
     // }
