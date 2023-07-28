@@ -4,6 +4,7 @@ import { Outlet, useRoutes } from "react-router-dom";
 const Layout = lazy(() => import("./components/Layout"));
 const Login = lazy(() => import("./pages/Login"));
 const GetHired = lazy(() => import("./pages/Company/GetHired"));
+const Employee = lazy(() => import("./pages/Company/DoHire/Employee"));
 
 export default function PublicRoutes(): ReactElement<
   any,
@@ -23,8 +24,12 @@ export default function PublicRoutes(): ReactElement<
           element: <Outlet />,
           children: [
             {
-              path: "get-hired",
+              path: "employee/get-hired",
               element: <GetHired />,
+            },
+            {
+              path: "employee/hire",
+              element: <Employee />,
             },
           ],
         },

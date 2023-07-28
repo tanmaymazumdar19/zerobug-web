@@ -10,8 +10,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
+
+const SidebarNavLinks = [
+  { path: "/dashboard", title: "Dashboard" },
+  { path: "/company/employee/hire", title: "Do Hire" },
+];
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -61,6 +67,12 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
@@ -74,14 +86,15 @@ const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
       </DrawerHeader>
       <Divider />
       <List>
-        {["Dashboard"].map((text) => (
-          <ListItem key={text} disablePadding sx={{ display: "block" }}>
+        {SidebarNavLinks.map(({ path, title }) => (
+          <ListItem key={path} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
+              onClick={() => handleNavigate(path)}
             >
               <ListItemIcon
                 sx={{
@@ -92,7 +105,7 @@ const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
               >
                 <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary={title} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         ))}
