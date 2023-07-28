@@ -1,10 +1,15 @@
 import { Box, Button, Divider, Popover, Typography } from "@mui/material";
 
-const Notificationpopover = ({ open, handleNotificationClose }: any) => {
+const Notificationpopover = ({
+  open,
+  handleNotificationClose,
+  anchorEl,
+}: any) => {
   return (
     <Popover
       id="simple-popover"
       open={open}
+      anchorEl={anchorEl}
       onClose={handleNotificationClose}
       anchorOrigin={{
         vertical: "bottom",
@@ -12,8 +17,8 @@ const Notificationpopover = ({ open, handleNotificationClose }: any) => {
       }}
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       sx={{
-        top: "-65px",
-        left: "-50px",
+        top: "-10px",
+        left: "-10px",
         p: 0,
         mt: 1.5,
         ml: 0.75,

@@ -39,9 +39,13 @@ const menuId = "primary-search-account-menu";
 
 const Header = ({ open, handleHeaderOpen }: any) => {
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const dispatch = useDispatch();
   const [openNotify, setOpenNotify] = useState<boolean>(false);
-  const handleNotificationClick = () => {
+  const handleNotificationClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setAnchorEl(event.currentTarget);
     setOpenNotify(true);
   };
   const handleNotificationClose = () => {
@@ -88,6 +92,7 @@ const Header = ({ open, handleHeaderOpen }: any) => {
           <Notificationpopover
             open={openNotify}
             handleNotificationClose={handleNotificationClose}
+            anchorEl={anchorEl}
           />
 
           <IconButton
