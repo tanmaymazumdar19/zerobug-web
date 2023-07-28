@@ -139,7 +139,7 @@ export default function GetHired() {
   };
 
   return (
-    <>
+    <Box position={"relative"}>
       <Box display="flex" justifyContent={"center"}>
         <a
           href="https://www.flaticon.com/free-icons/institution"
@@ -234,7 +234,7 @@ export default function GetHired() {
           </Box>
         </CustomModal>
       )}
-    </>
+    </Box>
   );
 }
 
