@@ -1,33 +1,49 @@
-import { JSXElementConstructor, ReactElement, lazy } from 'react'
-import { useRoutes } from 'react-router-dom'
+import { JSXElementConstructor, ReactElement, lazy } from "react";
+import { Outlet, useRoutes } from "react-router-dom";
 
-const Layout = lazy(() => import('./components/Layout'))
+const Layout = lazy(() => import("./components/Layout"));
+const Login = lazy(() => import("./pages/Login"));
+const GetHired = lazy(() => import("./pages/Company/GetHired"));
+const Employee = lazy(() => import("./pages/Company/DoHire/Employee"));
 
-export default function PublicRoutes(): ReactElement<any, string | JSXElementConstructor<any>> | null {
+export default function PublicRoutes(): ReactElement<
+  any,
+  string | JSXElementConstructor<any>
+> | null {
   let publicRoutes = useRoutes([
     {
-      path: '/',
+      path: "/",
       element: <Layout />,
       children: [
         {
-          path: '/admin',
+          path: "/admin",
           element: <h1>Admin Page</h1>,
         },
         {
-          path: '/company',
-          element: <h1>Company Page</h1>,
-        }
-      ]
+          path: "/company",
+          element: <Outlet />,
+          children: [
+            {
+              path: "employee/get-hired",
+              element: <GetHired />,
+            },
+            {
+              path: "employee/hire",
+              element: <Employee />,
+            },
+          ],
+        },
+      ],
     },
     {
-      path: '/login',
-      element: <h1>Login</h1>,
+      path: "/login",
+      element: <Login />,
     },
     {
-      path: '/signup',
+      path: "/signup",
       element: <h1>Signup</h1>,
     },
-  ])
-  
-  return publicRoutes
+  ]);
+
+  return publicRoutes;
 }

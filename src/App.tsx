@@ -1,9 +1,7 @@
-import { Suspense } from 'react'
+import { Suspense } from "react";
 
-import Routes from './route'
-import { BrowserRouter as Router } from 'react-router-dom'
-
-console.log('Hello');
+import Routes from "./route";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
   return (
@@ -12,7 +10,7 @@ const App = () => {
         <Routes />
       </Suspense>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
