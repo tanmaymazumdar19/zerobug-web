@@ -1,7 +1,28 @@
 import { useForm } from "react-hook-form";
 import { Box, Stack, Paper, Button, Typography } from "@mui/material";
 import InputTypeTextAndEmail from "../../components/Reuseable/Inputcomp";
-import { StyledForm } from "./style";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { storeLoginToken } from "../../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
+
+const StyledForm = styled.form`
+  label {
+    top: -4px;
+  }
+
+  input {
+    background-color: white;
+    border-radius: 12px;
+  }
+
+  > button[type="submit"] {
+    font-size: 14px;
+    :hover {
+      background-color: rgb(0 138 181);
+    }
+  }
+`;
 
 const defaultValues = {
   email: "",
@@ -11,6 +32,8 @@ const password = "password";
 const email = "email";
 
 function AdminLoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     watch,
     control,
@@ -66,7 +89,14 @@ function AdminLoginPage() {
               noValidate
               onSubmit={handleSubmit((data) => {
                 console.log(data);
+                dispatch(
+                  storeLoginToken({
+                    token: btoa(`${data?.email}:${data?.password}`),
+                    isAdmin: data?.email === "admin@demo.com",
+                  })
+                );
                 reset();
+                navigate("/");
               })}
             >
               <Stack spacing={2}>
