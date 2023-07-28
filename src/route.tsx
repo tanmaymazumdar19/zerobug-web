@@ -24,6 +24,10 @@ export default function PublicRoutes(): ReactElement<
           element: <Outlet />,
           children: [
             {
+              path: "dashboard",
+              element: <h1>Dashboard</h1>,
+            },
+            {
               path: "employee/get-hired",
               element: <GetHired />,
             },
