@@ -5,6 +5,7 @@ const Layout = lazy(() => import("./components/Layout"));
 const Login = lazy(() => import("./pages/Login"));
 const GetHired = lazy(() => import("./pages/Company/GetHired"));
 const Employee = lazy(() => import("./pages/Company/DoHire/Employee"));
+const Admin = lazy(() => import("./pages/SuperAdmin"));
 
 export default function PublicRoutes(): ReactElement<
   any,
@@ -17,7 +18,7 @@ export default function PublicRoutes(): ReactElement<
       children: [
         {
           path: "/admin",
-          element: <h1>Admin Page</h1>,
+          element: <Admin />,
         },
         {
           path: "/company",
