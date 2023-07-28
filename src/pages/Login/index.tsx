@@ -47,7 +47,7 @@ function AdminLoginPage() {
   } = useForm({ defaultValues });
 
   const loginSectionStyle = {
-    backgroundColor: "#b6f0f633",
+    // backgroundColor: "#b6f0f633",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -65,6 +65,7 @@ function AdminLoginPage() {
     backgroundColor: "white",
     borderRadius: "12px",
     overflow: "hidden",
+    border: '2px solid #333'
   };
 
   return (
@@ -81,7 +82,7 @@ function AdminLoginPage() {
                   fontWeight: "var(--font600)",
                 }}
               >
-                Admin Login
+                Welcome to Talent Pool
               </Typography>
             </Stack>
 
