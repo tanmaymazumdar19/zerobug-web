@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Box, Stack, Paper, Button, Typography } from "@mui/material";
 import InputTypeTextAndEmail from "../../components/Reuseable/Inputcomp";
 import { StyledForm } from "./style";
+
 const defaultValues = {
   email: "",
   password: "",
@@ -17,7 +18,6 @@ function AdminLoginPage() {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
   } = useForm({ defaultValues });
 
   const loginSectionStyle = {
