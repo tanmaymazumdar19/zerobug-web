@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import {
@@ -72,6 +72,7 @@ const Drawer = styled(MuiDrawer, {
 
 const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleNavigate = (path: string) => {
     navigate(path);
@@ -91,7 +92,14 @@ const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
       <Divider />
       <List>
         {SidebarNavLinks.map(({ path, title }) => (
-          <ListItem key={path} disablePadding sx={{ display: "block" }}>
+          <ListItem
+            key={path}
+            disablePadding
+            sx={{
+              display: "block",
+              ...(pathname === path ? { bgcolor: "#ddd" } : {}),
+            }}
+          >
             <ListItemButton
               sx={{
                 minHeight: 48,
