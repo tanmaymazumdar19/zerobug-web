@@ -16,6 +16,7 @@ import {
 import { setShowModal } from "../../../redux/slices/modalSlice";
 import { useDispatch } from "react-redux";
 import CustomModal from "../../../components/Reuseable/CustomModal";
+import { styled } from "styled-components";
 
 interface Column {
   id: "name" | "email" | "techStack" | "availability" | "budget" | "experience";
@@ -64,7 +65,7 @@ const rows = [
     "Shakeeb",
     "shakeeb.arsalan@quokkalabs.com",
     "React.JS",
-    100,
+    4000,
     5,
     "yes"
   ),
@@ -72,41 +73,42 @@ const rows = [
     "Tanmay",
     "tanmay.mazumdar@quokkalabs.com",
     "React.JS",
-    100,
-    5,
-    "yes"
+    4000,
+    4,
+    "no"
   ),
   createData(
     "Shubham",
     "shubham.chaudhary@quokkalabs.com",
     "React.JS",
-    100,
-    5,
+    3000,
+    2,
     "yes"
   ),
-  createData("Vinayak", "vinayak.@quokkalabs.com", "React.JS", 100, 5, "yes"),
+  createData("Vinayak", "vinayak.@quokkalabs.com", "Angular", 1000, 2, "yes"),
   createData(
     "Anshul",
     "anhsul.dimri@quokkalabs.com",
-    "React.JS",
-    100,
-    5,
+    "Node.JS",
+    3000,
+    3,
     "yes"
   ),
   createData(
     "Risalat",
     "rishalat.shamoa@quokkalabs.com",
-    "React.JS",
-    100,
-    5,
-    "yes"
+    "Java",
+    4000,
+    3,
+    "no"
   ),
 ];
 
 export default function StickyHeadTable() {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [detailsObj, setDetailsObj] = useState<any>({});
   const [showMoreOptions, setShowMoreOptions] = useState<number | null>(null);
 
   const handleChangePage = (_event: unknown, newPage: number) => {
@@ -120,7 +122,11 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
-  const handleRowClick = () => dispatch(setShowModal(true));
+  const handleRowClick = (name: string) => {
+    const obj = rows.find((item) => item.name === name);
+    setDetailsObj(obj);
+    dispatch(setShowModal(true));
+  };
 
   return (
     <>
@@ -152,7 +158,7 @@ export default function StickyHeadTable() {
                       key={row.email}
                       onMouseEnter={() => setShowMoreOptions(index)}
                       onMouseLeave={() => setShowMoreOptions(null)}
-                      onClick={handleRowClick}
+                      onClick={() => handleRowClick(row.name)}
                       sx={{ cursor: "pointer" }}
                     >
                       {columns.map((column) => {
@@ -206,12 +212,43 @@ export default function StickyHeadTable() {
       </Paper>
 
       <CustomModal>
-        hello
-        <br />
-        <br />
-        <br />
-        world
+        <Box
+          sx={{
+            margin: "2rem 0",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+          }}
+        >
+          <ParagraphStyled>
+            <span>Name:</span> {detailsObj.name}
+          </ParagraphStyled>
+
+          <ParagraphStyled>
+            <span>Tech. Stack:</span> {detailsObj.techStack}
+          </ParagraphStyled>
+
+          <ParagraphStyled>
+            <span>Experience:</span> {detailsObj.experience} years
+          </ParagraphStyled>
+
+          <ParagraphStyled>
+            <span>Email:</span> {detailsObj.email}
+          </ParagraphStyled>
+
+          <ParagraphStyled>
+            <span>Availability:</span> {detailsObj.availability}
+          </ParagraphStyled>
+        </Box>
       </CustomModal>
     </>
   );
 }
+
+const ParagraphStyled = styled.p`
+  span {
+    display: inline-block;
+    width: 100px;
+    font-weight: 600;
+  }
+`;
