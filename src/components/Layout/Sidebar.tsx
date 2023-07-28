@@ -13,7 +13,9 @@ import {
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 const drawerWidth = 240;
 
@@ -111,11 +113,17 @@ const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
               <ListItemIcon
                 sx={{
                   minWidth: 0,
-                  mr: open ? 3 : "auto",
+                  mr: open ? "10px" : "auto",
                   justifyContent: "center",
                 }}
               >
-                <InboxIcon />
+                {title === "Dashboard" ? (
+                  <EqualizerIcon />
+                ) : title === "Do Hire" ? (
+                  <PersonAddIcon />
+                ) : title === "Get Hired" ? (
+                  <PermIdentityIcon />
+                ) : null}
               </ListItemIcon>
               <ListItemText primary={title} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
