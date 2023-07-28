@@ -10,7 +10,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Notificationpopover from "../Reuseable/Notificationpopover";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetAuthToken } from "../../redux/slices/authSlice";
 const HeaderWidth = 240;
 
@@ -42,6 +42,8 @@ const Header = ({ open, handleHeaderOpen }: any) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const dispatch = useDispatch();
   const [openNotify, setOpenNotify] = useState<boolean>(false);
+  const isAdmin = useSelector((state: any) => state?.authSlice?.isAdmin)
+
   const handleNotificationClick = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -75,7 +77,7 @@ const Header = ({ open, handleHeaderOpen }: any) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant Header
+            {isAdmin ? 'Admin Panel' : 'Company Panel'}
           </Typography>
         </Box>
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
