@@ -3,7 +3,7 @@ import { fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
 import type { RootState } from './redux/store/store'
 
-export const apiRoot = 'https://jsonplaceholder.typicode.com/'
+export const apiRoot = 'https://talent-pool.onrender.com/admin-api/v1'
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: apiRoot,
