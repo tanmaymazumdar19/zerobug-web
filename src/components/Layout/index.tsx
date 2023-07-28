@@ -5,17 +5,22 @@ import CssBaseline from "@mui/material/CssBaseline";
 import MainContent from "./Content";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function MiniDrawer() {
   const navigate = useNavigate();
   const authToken = useSelector((state: any) => state?.authSlice?.userToken);
-  console.log("authToken", authToken);
+  const { pathname } = useLocation();
+  const isAdmin = useSelector((state: any) => state?.authSlice?.isAdmin)
 
   useLayoutEffect(() => {
     if (!authToken) {
       navigate("/login");
+    }
+
+    if (pathname === '/' && isAdmin) {
+      navigate('/admin')
     }
   }, []);
 
