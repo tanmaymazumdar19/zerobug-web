@@ -19,7 +19,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["authSlice", "GetHired"], // reducers which you want to persist
+  whitelist: ["authSlice", "getHiredSlice"], // reducers which you want to persist
   blacklist: [api.reducerPath], // reducers which you don't want to persist
 };
 

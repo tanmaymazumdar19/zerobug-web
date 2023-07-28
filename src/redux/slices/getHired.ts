@@ -2,8 +2,6 @@ import { employeesArray } from "./../../utils/data";
 import type { Slice } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-// import type { Slice } from '@reduxjs/toolkit'
-
 export interface AuthState {
   employees: any[];
 }
@@ -11,7 +9,7 @@ const initialState: AuthState = {
   employees: [...employeesArray],
 };
 
-const authSlice: Slice = createSlice({
+const getHiredSlice: Slice = createSlice({
   name: "GetHired",
   initialState,
   reducers: {
@@ -29,5 +27,5 @@ const authSlice: Slice = createSlice({
   },
 });
 
-export const { storeLoginToken, resetAuthToken } = authSlice.actions;
-export default authSlice.reducer;
+export const { createUser, editUser } = getHiredSlice.actions;
+export default getHiredSlice.reducer;
