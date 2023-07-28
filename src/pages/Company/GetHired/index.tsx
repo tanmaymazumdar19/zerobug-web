@@ -135,8 +135,6 @@ export default function GetHired() {
   };
 
   const handleDetails = () => {
-    console.log("He");
-
     dispatch(setShowModal(true));
   };
 
@@ -170,6 +168,7 @@ export default function GetHired() {
           Tech Stack : <b>{companyDetails[0].techStack}</b>
         </CustomTypography>
       </Box>
+
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

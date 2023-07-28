@@ -1,7 +1,8 @@
-import InputTypeTextAndEmail from "../../../components/Reuseable/Inputcomp";
-import { Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { Stack, Box, Button } from "@mui/material";
+
 import { StyledForm } from "../../Login/style";
+import InputTypeTextAndEmail from "../../../components/Reuseable/Inputcomp";
 
 const defaultValues: any = [
   { name: "empName", value: "", type: "text", label: "Employee Name" },
@@ -21,7 +22,10 @@ const EmployeeDetails = () => {
     register,
     handleSubmit,
     reset,
+    formState: { errors },
   } = useForm();
+  console.log(errors);
+
   return (
     <Stack spacing={2}>
       <StyledForm
@@ -32,7 +36,6 @@ const EmployeeDetails = () => {
         })}
       >
         {defaultValues.map((item: any) => {
-          console.log("item", item);
           return (
             <InputTypeTextAndEmail
               type={item.type}
@@ -40,11 +43,28 @@ const EmployeeDetails = () => {
               label={item.label}
               control={control}
               register={register}
-              // isError={!!errors?.[a]?.message}
-              // helperText={errors?.email?.message}
+              isError={!!errors?.name?.message}
+              helperText={errors?.name?.message}
             />
           );
         })}
+        <Box
+          sx={{
+            display: "flex",
+            gap: "1rem",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+
+            button: {
+              borderRadius: "8px",
+            },
+          }}
+        >
+          <Button variant="outlined">Cancel</Button>
+          <Button variant="contained" type="submit" disableElevation>
+            Submit
+          </Button>
+        </Box>
       </StyledForm>
     </Stack>
   );
