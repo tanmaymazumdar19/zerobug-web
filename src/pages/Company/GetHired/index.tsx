@@ -12,6 +12,10 @@ import {
   Typography,
 } from "@mui/material";
 import CompanyIcon from "../../../assets/Company.png";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowModal } from "../../../redux/slices/modalSlice";
+import CustomModal from "../../../components/Reuseable/CustomModal";
+import EmployeeDetails from "./EmployeeDetails";
 
 interface Column {
   id:
@@ -50,7 +54,7 @@ function createData(
   role: string,
   techStack: string,
   experience: string,
-  availability: string,
+  availability: string
 ): Data {
   return { empName, compName, role, techStack, experience, availability };
 }
@@ -112,6 +116,10 @@ const rows = [
 ];
 
 export default function GetHired() {
+  const dispatch = useDispatch();
+  const selector = useSelector((store: any) => store);
+
+  const showModal = selector.modalSlice.showModal;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -124,6 +132,12 @@ export default function GetHired() {
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const handleDetails = () => {
+    console.log("He");
+
+    dispatch(setShowModal(true));
   };
 
   return (
@@ -186,7 +200,13 @@ export default function GetHired() {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            onClick={
+                              column.id === "empName" ? handleDetails : () => {}
+                            }
+                          >
                             {value}
                           </TableCell>
                         );
@@ -207,6 +227,14 @@ export default function GetHired() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+
+      {showModal && (
+        <CustomModal>
+          <Box width={"100%"} p={5} maxHeight={"400"} overflow={"none auto"}>
+            <EmployeeDetails />
+          </Box>
+        </CustomModal>
+      )}
     </>
   );
 }
