@@ -16,6 +16,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -23,6 +24,10 @@ const SidebarNavLinks = [
   { path: "/company/dashboard", title: "Dashboard" },
   { path: "/company/employee/hire", title: "Do Hire" },
   { path: "/company/employee/get-hired", title: "Get Hired" },
+];
+
+const AdminLinks = [
+  { path: "/admin", title: "Companies" },
 ];
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -75,6 +80,7 @@ const Drawer = styled(MuiDrawer, {
 const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const isAdmin = useSelector((state: any) => state?.authSlice?.isAdmin)
 
   const handleNavigate = (path: string) => {
     navigate(path);
@@ -93,7 +99,7 @@ const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
       </DrawerHeader>
       <Divider />
       <List>
-        {SidebarNavLinks.map(({ path, title }) => (
+        {(isAdmin ? AdminLinks : SidebarNavLinks).map(({ path, title }) => (
           <ListItem
             key={path}
             disablePadding
@@ -117,7 +123,7 @@ const Sidebar = ({ theme, open, handleDrawerClose }: any) => {
                   justifyContent: "center",
                 }}
               >
-                {title === "Dashboard" ? (
+                {title === "Dashboard" || title === "Companies" ? (
                   <EqualizerIcon />
                 ) : title === "Do Hire" ? (
                   <PersonAddIcon />
