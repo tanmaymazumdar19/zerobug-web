@@ -11,8 +11,8 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { adminApis, companyApi } from '../api/api'
-import rootReducer from '../rootReducer/rootReducer'
+import { adminApis, companyApi } from "../api/api";
+import rootReducer from "../rootReducer/rootReducer";
 
 const persistConfig = {
   key: "root",
