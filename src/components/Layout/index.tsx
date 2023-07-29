@@ -35,9 +35,9 @@ export default function MiniDrawer() {
       navigate("/login");
     }
 
-    if (pathname === "/" && isAdmin) {
+    if (pathname === "/" && isAdmin && authToken) {
       navigate("/admin");
-    } else if (pathname === "/" && !isAdmin) {
+    } else if (pathname === "/" && !isAdmin && authToken) {
       navigate("/company/employee/hire");
     }
   }, []);
