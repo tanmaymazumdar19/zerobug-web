@@ -6,23 +6,15 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { storeLoginToken } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useAdminLoginMutation, useCompanyLoginMutation } from "../../redux/api/api";
+import {
+  useAdminLoginMutation,
+  useCompanyLoginMutation,
+} from "../../redux/api/api";
 
 const StyledForm = styled.form`
-  label {
-    top: -4px;
-  }
-
   input {
     background-color: white;
     border-radius: 12px;
-  }
-
-  > button[type="submit"] {
-    font-size: 14px;
-    :hover {
-      background-color: rgb(0 138 181);
-    }
   }
 `;
 
@@ -36,8 +28,8 @@ const email = "email";
 function AdminLoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [tryAdminLogin] = useAdminLoginMutation()
-  const [tryCompanyLogin] = useCompanyLoginMutation()
+  const [tryAdminLogin] = useAdminLoginMutation();
+  const [tryCompanyLogin] = useCompanyLoginMutation();
   const {
     watch,
     control,
@@ -48,7 +40,6 @@ function AdminLoginPage() {
   } = useForm({ defaultValues });
 
   const loginSectionStyle = {
-    // backgroundColor: "#b6f0f633",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -66,12 +57,11 @@ function AdminLoginPage() {
     backgroundColor: "white",
     borderRadius: "12px",
     overflow: "hidden",
-    border: '2px solid #333'
+    border: "2px solid #333",
   };
 
   return (
     <Box sx={{ position: "relative" }}>
-      {/* <NavarLogoImg src={mainLogo} /> */}
       <Box component="section" sx={loginSectionStyle}>
         <Paper elevation={2} sx={paperStyle}>
           <Box sx={loginDiv}>
@@ -89,17 +79,20 @@ function AdminLoginPage() {
             <StyledForm
               noValidate
               onSubmit={handleSubmit(async (data) => {
-                const res: any = data?.email === "anshul@yopmail.com" ? await tryAdminLogin({body: data}).unwrap() : await tryCompanyLogin({body: data}).unwrap()
-                if (res?.status === 200) {
+                const res: any =
+                  data?.email === "anshul@yopmail.com"
+                    ? await tryAdminLogin({ body: data }).unwrap()
+                    : await tryCompanyLogin({ body: data }).unwrap();
+                if (res?.status === 200 || res?.status === true) {
                   dispatch(
                     storeLoginToken({
                       token: res?.data.authToken,
                       isAdmin: data?.email === "anshul@yopmail.com",
                     })
                   );
-                  navigate('/');
+                  navigate("/");
                 } else {
-                  navigate('/');
+                  navigate("/");
                 }
                 reset();
               })}
@@ -134,7 +127,6 @@ function AdminLoginPage() {
                 type="submit"
                 variant="contained"
                 sx={{
-                  backgroundColor: "#299FB5",
                   mt: 4,
                   borderRadius: "12px",
                   textTransform: "capitalize",

@@ -17,6 +17,7 @@ import { setShowModal } from "../../../redux/slices/modalSlice";
 import { useDispatch } from "react-redux";
 import CustomModal from "../../../components/Reuseable/CustomModal";
 import { styled } from "styled-components";
+import { toast } from "react-toastify";
 
 interface Column {
   id: "name" | "email" | "techStack" | "availability" | "budget" | "experience";
@@ -128,6 +129,11 @@ export default function StickyHeadTable() {
     dispatch(setShowModal(true));
   };
 
+  const handleRequestToHire = (e: any) => {
+    e.stopPropagation();
+    toast.success("Request sent successfully 😊");
+  };
+
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -188,7 +194,7 @@ export default function StickyHeadTable() {
                           }}
                         >
                           <Tooltip title="Request to hire">
-                            <IconButton>
+                            <IconButton onClick={handleRequestToHire}>
                               <GroupAddIcon />
                             </IconButton>
                           </Tooltip>
