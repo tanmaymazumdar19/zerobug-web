@@ -5,13 +5,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Badge, Box } from "@mui/material";
+import { Badge, Box, Button } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Notificationpopover from "../Reuseable/Notificationpopover";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetAuthToken } from "../../redux/slices/authSlice";
+import CustomModal from "../Reuseable/CustomModal";
+import { setShowModal } from "../../redux/slices/modalSlice";
 const HeaderWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -40,6 +42,11 @@ const menuId = "primary-search-account-menu";
 const Header = ({ open, handleHeaderOpen }: any) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const notificationState = useSelector(
+    (state: any) => state.notificationSlice
+  );
+  console.log("notificationState", notificationState);
   const dispatch = useDispatch();
   const [openNotify, setOpenNotify] = useState<boolean>(false);
   const handleNotificationClick = (
@@ -55,7 +62,12 @@ const Header = ({ open, handleHeaderOpen }: any) => {
   const handlelogoutClick = () => {
     localStorage.setItem("access_token", "");
     dispatch(resetAuthToken(""));
-    navigate("/login");
+    dispatch(setShowModal(false));
+    navigate("/");
+  };
+
+  const handleOpenLogoutModal = () => {
+    dispatch(setShowModal(true));
   };
 
   return (
@@ -93,26 +105,41 @@ const Header = ({ open, handleHeaderOpen }: any) => {
             open={openNotify}
             handleNotificationClose={handleNotificationClose}
             anchorEl={anchorEl}
+            notificationState={notificationState}
           />
-
           <IconButton
             size="large"
             edge="end"
             aria-label="account of current user"
             aria-controls={menuId}
             aria-haspopup="true"
-            onClick={handlelogoutClick}
+            onClick={handleOpenLogoutModal}
             color="inherit"
           >
-            {/* <AccountCircle /> */}
             <LogoutIcon />
           </IconButton>
-          {/* <Profilepopover
-            open={openProfile}
-            handleProfileClose={handleProfileClose}
-          /> */}
         </Box>
       </Toolbar>
+      <CustomModal>
+        <Box
+          sx={{
+            paddingTop: "1rem",
+            maxWidth: "25vw",
+            marginTop: "1rem",
+            minHeight: "8rem",
+            margin: "0px 1rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          <Typography variant="h4">Are you Sure ? </Typography>
+          <Button variant="contained" type="button" onClick={handlelogoutClick}>
+            Logout
+          </Button>
+        </Box>
+      </CustomModal>
     </AppBar>
   );
 };

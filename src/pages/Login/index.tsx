@@ -71,9 +71,6 @@ function AdminLoginPage() {
         <Paper elevation={2} sx={paperStyle}>
           <Box sx={loginDiv}>
             <Stack spacing={1} sx={{ mb: 3 }} alignItems="center">
-              {/* <Stack width="4rem" sx={{ mb: 2 }}>
-                <img src={adminLogo} />
-              </Stack> */}
               <Typography
                 variant="h1"
                 sx={{
@@ -84,7 +81,6 @@ function AdminLoginPage() {
                 Admin Login
               </Typography>
             </Stack>
-
             <StyledForm
               noValidate
               onSubmit={handleSubmit((data) => {
@@ -96,7 +92,7 @@ function AdminLoginPage() {
                   })
                 );
                 reset();
-                navigate("/");
+                navigate("/admin");
               })}
             >
               <Stack spacing={2}>
