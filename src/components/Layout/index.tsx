@@ -12,9 +12,7 @@ const SidebarNavLinks = [
   { path: "/company/employee/get-hired", title: "Get Hired" },
 ];
 
-const AdminLinks = [
-  { path: "/admin", title: "Companies" },
-];
+const AdminLinks = [{ path: "/admin", title: "Companies" }];
 
 export default function MiniDrawer() {
   const navigate = useNavigate();
@@ -24,13 +22,13 @@ export default function MiniDrawer() {
   const isAdmin = useSelector((state: any) => state?.authSlice?.isAdmin);
 
   const handleNavigate = (path: string, title: string) => {
-    navigate(path, { state: {title} });
+    navigate(path, { state: { title } });
   };
 
   const tryLogout = () => {
-    dispatch(resetAuthToken({}))
-    navigate('/login')
-  }
+    dispatch(resetAuthToken({}));
+    navigate("/login");
+  };
 
   useLayoutEffect(() => {
     if (!authToken) {
@@ -39,6 +37,8 @@ export default function MiniDrawer() {
 
     if (pathname === "/" && isAdmin) {
       navigate("/admin");
+    } else if (pathname === "/" && !isAdmin) {
+      navigate("/company/employee/hire");
     }
   }, []);
 
@@ -46,23 +46,23 @@ export default function MiniDrawer() {
     <Box sx={{ display: "flex" }}>
       <Box sx={{ display: "flex", width: "100%", height: "100vh" }}>
         <Box sx={{ minWidth: 320, bgcolor: "#f1f1f4", p: "52px 0" }}>
-        {(isAdmin ? AdminLinks : SidebarNavLinks).map(({ path, title }) => (
-          <Box
-            key={path}
-            sx={{
-              fontFamily: "'Inter', sans-serif",
-              p: "12px 36px",
-              cursor: "pointer",
-              bgcolor: path === pathname ? "#e1e1e5" : "transparent",
-              ":hover": { bgcolor: "#e6e6ea" },
-            }}
-            onClick={() => handleNavigate(path, title)}
-          >
-            {title}
-          </Box>
-        ))}
+          {(isAdmin ? AdminLinks : SidebarNavLinks).map(({ path, title }) => (
+            <Box
+              key={path}
+              sx={{
+                fontFamily: "'Inter', sans-serif",
+                p: "12px 36px",
+                cursor: "pointer",
+                bgcolor: path === pathname ? "#e1e1e5" : "transparent",
+                ":hover": { bgcolor: "#e6e6ea" },
+              }}
+              onClick={() => handleNavigate(path, title)}
+            >
+              {title}
+            </Box>
+          ))}
         </Box>
-        <Box sx={{ width: "100%", p: "32px 48px", overflow: 'auto' }}>
+        <Box sx={{ width: "100%", p: "32px 48px", overflow: "auto" }}>
           <Box
             sx={{
               display: "flex",
@@ -90,7 +90,17 @@ export default function MiniDrawer() {
               </Typography>
             </Box>
 
-            <Avatar sx={{ width: 32, height: 32, cursor: 'pointer', fontSize: '12px' }} onClick={() => tryLogout()}>TM</Avatar>
+            <Avatar
+              sx={{
+                width: 32,
+                height: 32,
+                cursor: "pointer",
+                fontSize: "12px",
+              }}
+              onClick={() => tryLogout()}
+            >
+              TM
+            </Avatar>
           </Box>
 
           <MainContent />
