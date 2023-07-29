@@ -2,8 +2,9 @@ import { useLayoutEffect } from "react";
 import Box from "@mui/material/Box";
 import MainContent from "./Content";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Typography } from "@mui/material";
+import { resetAuthToken } from "../../redux/slices/authSlice";
 
 const SidebarNavLinks = [
   // { path: "/company/dashboard", title: "Dashboard" },
@@ -17,6 +18,7 @@ const AdminLinks = [
 
 export default function MiniDrawer() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const authToken = useSelector((state: any) => state?.authSlice?.userToken);
   const { pathname, state } = useLocation();
   const isAdmin = useSelector((state: any) => state?.authSlice?.isAdmin);
@@ -24,6 +26,11 @@ export default function MiniDrawer() {
   const handleNavigate = (path: string, title: string) => {
     navigate(path, { state: {title} });
   };
+
+  const tryLogout = () => {
+    dispatch(resetAuthToken({}))
+    navigate('/login')
+  }
 
   useLayoutEffect(() => {
     if (!authToken) {
@@ -83,7 +90,7 @@ export default function MiniDrawer() {
               </Typography>
             </Box>
 
-            <Avatar sx={{ width: 32, height: 32, cursor: 'pointer', fontSize: '12px' }}>TM</Avatar>
+            <Avatar sx={{ width: 32, height: 32, cursor: 'pointer', fontSize: '12px' }} onClick={() => tryLogout()}>TM</Avatar>
           </Box>
 
           <MainContent />
