@@ -7,6 +7,7 @@ const Login = lazy(() => import("./pages/Login"));
 const GetHired = lazy(() => import("./pages/Company/GetHired"));
 const Employee = lazy(() => import("./pages/Company/DoHire/Employee"));
 const Admin = lazy(() => import("./pages/SuperAdmin"));
+const AboutUs = lazy(() => import("./pages/About"));
 
 export default function PublicRoutes(): ReactElement<
   any,
@@ -27,7 +28,7 @@ export default function PublicRoutes(): ReactElement<
             },
             {
               path: ":companyId",
-              element: <CompanyDetails />,
+              element: <GetHired />,
             },
           ],
         },
@@ -56,9 +57,10 @@ export default function PublicRoutes(): ReactElement<
       element: <Login />,
     },
     {
-      path: "/signup",
-      element: <h1>Signup</h1>,
+      path: "/aboutus",
+      element: <AboutUs />,
     },
+    {},
   ]);
 
   return publicRoutes;
