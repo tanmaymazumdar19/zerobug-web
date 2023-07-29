@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal } from '../../../redux/slices/modalSlice'
 import CustomModal from '../../../components/Reuseable/CustomModal'
 import EmployeeDetails from './EmployeeDetails'
+import { useCompanyDetailsQuery } from '../../../redux/api/api'
+import { useParams } from 'react-router-dom'
 
 interface Column {
   id: string
@@ -46,6 +48,8 @@ const companyDetails = [
 export default function GetHired() {
   const dispatch = useDispatch()
   const selector = useSelector((store: any) => store)
+  const params = useParams()
+  const { data } = useCompanyDetailsQuery(params?.companyId)
 
   const showModal = selector.modalSlice.showModal
   const employeesList = selector.getHiredSlice.employees
@@ -79,22 +83,22 @@ export default function GetHired() {
       </Box>
       <Box mb={3}>
         <CustomTypography>
-          Company Name : <b>{companyDetails[0].companyName}</b>
+          Company Name : <b>{data?.data?.name}</b>
         </CustomTypography>
         <CustomTypography>
-          Company Email : <b>{companyDetails[0].companyEmail}</b>
+          Company Email : <b>{data?.data?.email}</b>
         </CustomTypography>
         <CustomTypography>
           Company Description : <b>{companyDetails[0].companyDesc}</b>
         </CustomTypography>
-        <CustomTypography>
+        {/* <CustomTypography>
           Company Established : <b>{companyDetails[0].companyEstd}</b>
+        </CustomTypography> */}
+        <CustomTypography>
+          Company Size : <b>{data?.data?.size}</b>
         </CustomTypography>
         <CustomTypography>
-          Company Strength : <b>{companyDetails[0].companyStrength}</b>
-        </CustomTypography>
-        <CustomTypography>
-          Tech Stack : <b>{companyDetails[0].techStack}</b>
+          Tech Stack : <b>{data?.data?.domain?.join(', ')}</b>
         </CustomTypography>
       </Box>
 
