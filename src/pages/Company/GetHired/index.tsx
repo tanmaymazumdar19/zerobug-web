@@ -18,46 +18,19 @@ import CustomModal from "../../../components/Reuseable/CustomModal";
 import EmployeeDetails from "./EmployeeDetails";
 
 interface Column {
-  id:
-    | "empName"
-    | "compName"
-    | "role"
-    | "techStack"
-    | "experience"
-    | "availability";
+  id: string;
   label: string;
-  minWidth?: number;
-  align?: "right";
 }
 
 const columns: readonly Column[] = [
-  { id: "empName", label: "Emp Name", minWidth: 170 },
-  { id: "compName", label: "Comp Name", minWidth: 170 },
-  { id: "role", label: "Role", minWidth: 170 },
-  { id: "techStack", label: "Tech Stack", minWidth: 170 },
-  { id: "experience", label: "Experience", minWidth: 170 },
-  { id: "availability", label: "Availability", minWidth: 170 },
+  { id: "empName", label: "Emp Name" },
+  { id: "compName", label: "Comp Name" },
+  { id: "role", label: "Role" },
+  { id: "techStack", label: "Tech Stack" },
+  { id: "experience", label: "Experience" },
+  { id: "availability", label: "Availability" },
+  { id: "gender", label: "Gender" },
 ];
-
-interface Data {
-  empName: string;
-  compName: string;
-  role: string;
-  techStack: string;
-  availability: string;
-  experience: string;
-}
-
-function createData(
-  empName: string,
-  compName: string,
-  role: string,
-  techStack: string,
-  experience: string,
-  availability: string
-): Data {
-  return { empName, compName, role, techStack, experience, availability };
-}
 
 const companyDetails = [
   {
@@ -72,56 +45,17 @@ const companyDetails = [
   },
 ];
 
-const rows = [
-  createData(
-    "Shakeeb",
-    "Quokkalabs LLP",
-    "FrontEnd Developer",
-    "React",
-    "3",
-    "No"
-  ),
-  createData(
-    "Tanmay",
-    "Quokkalabs LLP",
-    "FrontEnd Developer",
-    "React",
-    "3",
-    "No"
-  ),
-  createData(
-    "Vinayak",
-    "Quokkalabs LLP",
-    "FrontEnd Developer",
-    "React",
-    "3",
-    "No"
-  ),
-  createData(
-    "Shubham",
-    "Quokkalabs LLP",
-    "FrontEnd Developer",
-    "React",
-    "3",
-    "No"
-  ),
-  createData(
-    "Anshul",
-    "Quokkalabs LLP",
-    "BackEnd Developer",
-    "Nodejs",
-    "3",
-    "No"
-  ),
-];
-
 export default function GetHired() {
   const dispatch = useDispatch();
   const selector = useSelector((store: any) => store);
 
   const showModal = selector.modalSlice.showModal;
+  const employeesList = selector.getHiredSlice.employees;
+  console.log(employeesList);
+  
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [userDetails, setUserDetails] = React.useState({});
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -134,14 +68,14 @@ export default function GetHired() {
     setPage(0);
   };
 
-  const handleDetails = () => {
-    console.log("He");
-
+  const handleDetails = (id: string) => {
+    const valueObj = employeesList.find((item: any) => item.empName === id);
+    setUserDetails(valueObj);
     dispatch(setShowModal(true));
   };
 
   return (
-    <>
+    <Box position={"relative"}>
       <Box display="flex" justifyContent={"center"}>
         <a
           href="https://www.flaticon.com/free-icons/institution"
@@ -170,24 +104,19 @@ export default function GetHired() {
           Tech Stack : <b>{companyDetails[0].techStack}</b>
         </CustomTypography>
       </Box>
+
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
+                  <TableCell key={column.id}>{column.label}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {employeesList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => {
                   return (
@@ -202,10 +131,17 @@ export default function GetHired() {
                         return (
                           <TableCell
                             key={column.id}
-                            align={column.align}
                             onClick={
-                              column.id === "empName" ? handleDetails : () => {}
+                              column.id === "empName"
+                                ? () => handleDetails(row.empName)
+                                : () => null
                             }
+                            sx={{
+                              textDecoration:
+                                column.id === "empName" ? "underline" : "",
+                              cursor:
+                                column.id === "empName" ? "pointer" : "default",
+                            }}
                           >
                             {value}
                           </TableCell>
@@ -220,7 +156,7 @@ export default function GetHired() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={employeesList.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -231,11 +167,11 @@ export default function GetHired() {
       {showModal && (
         <CustomModal>
           <Box width={"100%"} p={5} maxHeight={"400"} overflow={"none auto"}>
-            <EmployeeDetails />
+            <EmployeeDetails userDetails={userDetails} />
           </Box>
         </CustomModal>
       )}
-    </>
+    </Box>
   );
 }
 
