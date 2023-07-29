@@ -2,8 +2,8 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import type { RootState } from './redux/store/store'
 
-export const adminApiRoot = 'https://talent-pool.onrender.com/api/v1'
-export const companyApiRoot = 'https://talent-pool.onrender.com/admin-api/v1'
+export const companyApiRoot = 'https://talent-pool.onrender.com/api/v1'
+export const adminApiRoot = 'https://talent-pool.onrender.com/admin-api/v1'
 
 export const adminBaseQuery = fetchBaseQuery({
   baseUrl: adminApiRoot,
