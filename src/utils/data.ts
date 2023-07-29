@@ -150,3 +150,69 @@ export const employeesArray = [
     id: Date.now().toLocaleString(),
   },
 ];
+
+export const staticRequestsArray = [
+  {
+    compName: "ABC Corp",
+    msg: "Request for approval",
+    requestTime: "2023-07-28T22:26:55.557Z",
+  },
+
+  {
+    compName: "XYZ Inc",
+    msg: "Request for approval",
+    requestTime: "2023-07-29T10:15:30.123Z",
+  },
+
+  {
+    compName: "123 Tech",
+    msg: "Request for approval",
+    requestTime: "2023-07-29T14:45:20.999Z",
+  },
+
+  {
+    compName: "Top Solutions",
+    msg: "Request for approval",
+    requestTime: "2023-07-29T18:33:47.312Z",
+  },
+
+  {
+    compName: "Innovate Co",
+    msg: "Request for approval",
+    requestTime: "2023-07-30T08:59:10.888Z",
+  },
+
+  {
+    compName: "Global Software",
+    msg: "Request for approval",
+    requestTime: "2023-07-30T12:27:40.001Z",
+  },
+
+  {
+    compName: "ABC Corp",
+    msg: "Request for approval",
+    requestTime: "2023-07-30T16:08:12.789Z",
+  },
+
+  {
+    compName: "XYZ Inc",
+    msg: "Request for approval",
+    requestTime: "2023-07-31T09:40:05.555Z",
+  },
+
+  {
+    compName: "123 Tech",
+    msg: "Request for approval",
+    requestTime: "2023-07-31T14:02:22.222Z",
+  },
+
+  {
+    compName: "Top Solutions",
+    msg: "Request for approval",
+    requestTime: "2023-07-31T19:18:30.450Z",
+  },
+].sort((a: any, b: any) => {
+  return a.requestTime - b.requestTime;
+});
+
+console.log(staticRequestsArray);
