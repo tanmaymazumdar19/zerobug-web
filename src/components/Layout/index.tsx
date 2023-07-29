@@ -20,19 +20,19 @@ export default function MiniDrawer() {
   const authToken = useSelector((state: any) => state?.authSlice?.userToken)
   const { pathname, state } = useLocation()
   const isAdmin = useSelector((state: any) => state?.authSlice?.isAdmin)
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
 
   const handleNavigate = (path: string, title: string) => {
     navigate(path, { state: { title } })
   }
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(null)
   }
 
   const tryLogout = () => {
@@ -112,7 +112,7 @@ export default function MiniDrawer() {
 
             <Menu
               anchorEl={anchorEl}
-              id="account-menu"
+              id='account-menu'
               open={open}
               onClose={handleClose}
               onClick={handleClose}
@@ -145,12 +145,14 @@ export default function MiniDrawer() {
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-              <MenuItem onClick={() => {
-                handleClose()
-                tryLogout()
-              }}>
+              <MenuItem
+                onClick={() => {
+                  handleClose()
+                  tryLogout()
+                }}
+              >
                 <ListItemIcon>
-                  <Logout fontSize="small" />
+                  <Logout fontSize='small' />
                 </ListItemIcon>
                 Logout
               </MenuItem>

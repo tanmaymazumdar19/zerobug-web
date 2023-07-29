@@ -18,6 +18,12 @@ export const adminApis = createApi({
         body: data.body,
       }),
     }),
+    companyDetails: builder.query<any, any>({
+      query: (id: any) => ({
+        url: `https://talent-pool.onrender.com/api/v1/company?companyId=${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
@@ -35,5 +41,5 @@ export const companyApi = createApi({
   }),
 })
 
-export const { useFetchCompaniesListQuery, useAdminLoginMutation } = adminApis
+export const { useFetchCompaniesListQuery, useAdminLoginMutation, useCompanyDetailsQuery } = adminApis
 export const { useCompanyLoginMutation } = companyApi
