@@ -131,7 +131,7 @@ export default function StickyHeadTable() {
 
   const handleRequestToHire = (e: any) => {
     e.stopPropagation();
-    toast.success("You requested to hire this developer");
+    toast.success("Request sent successfully 😊");
   };
 
   return (
