@@ -1,50 +1,47 @@
-import { JSXElementConstructor, ReactElement, lazy } from "react";
-import { Outlet, useRoutes } from "react-router-dom";
+import { JSXElementConstructor, ReactElement, lazy } from 'react'
+import { Outlet, useRoutes } from 'react-router-dom'
 
-const Layout = lazy(() => import("./components/Layout"));
-const Login = lazy(() => import("./pages/Login"));
-const GetHired = lazy(() => import("./pages/Company/GetHired"));
-const Employee = lazy(() => import("./pages/Company/DoHire/Employee"));
-const Admin = lazy(() => import("./pages/SuperAdmin"));
-const AboutUs = lazy(() => import("./pages/About"));
+const Layout = lazy(() => import('./components/Layout'))
+const Login = lazy(() => import('./pages/Login'))
+const GetHired = lazy(() => import('./pages/Company/GetHired'))
+const Employee = lazy(() => import('./pages/Company/DoHire/Employee'))
+const Admin = lazy(() => import('./pages/SuperAdmin'))
+const AboutUs = lazy(() => import('./pages/About'))
 
-export default function PublicRoutes(): ReactElement<
-  any,
-  string | JSXElementConstructor<any>
-> | null {
+export default function PublicRoutes(): ReactElement<any, string | JSXElementConstructor<any>> | null {
   let publicRoutes = useRoutes([
     {
-      path: "/",
+      path: '/',
       element: <Layout />,
       children: [
         {
-          path: "/admin",
+          path: '/admin',
           element: <Outlet />,
           children: [
             {
-              path: "",
+              path: '',
               element: <Admin />,
             },
             {
-              path: ":companyId",
+              path: ':companyId',
               element: <GetHired />,
             },
           ],
         },
         {
-          path: "/company",
+          path: '/company',
           element: <Outlet />,
           children: [
             {
-              path: "dashboard",
+              path: 'dashboard',
               element: <h1>Dashboard</h1>,
             },
             {
-              path: "employee/get-hired",
+              path: 'employee/get-hired',
               element: <GetHired />,
             },
             {
-              path: "employee/hire",
+              path: 'employee/hire',
               element: <Employee />,
             },
           ],
@@ -52,15 +49,15 @@ export default function PublicRoutes(): ReactElement<
       ],
     },
     {
-      path: "/login",
+      path: '/login',
       element: <Login />,
     },
     {
-      path: "/aboutus",
+      path: '/aboutus',
       element: <AboutUs />,
     },
     {},
-  ]);
+  ])
 
-  return publicRoutes;
+  return publicRoutes
 }
