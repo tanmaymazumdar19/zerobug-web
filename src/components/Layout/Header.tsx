@@ -49,6 +49,8 @@ const Header = ({ open, handleHeaderOpen }: any) => {
   console.log("notificationState", notificationState);
   const dispatch = useDispatch();
   const [openNotify, setOpenNotify] = useState<boolean>(false);
+  const isAdmin = useSelector((state: any) => state?.authSlice?.isAdmin)
+
   const handleNotificationClick = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -87,7 +89,7 @@ const Header = ({ open, handleHeaderOpen }: any) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant Header
+            {isAdmin ? 'Admin Panel' : 'Company Panel'}
           </Typography>
         </Box>
         <Box sx={{ display: { xs: "none", md: "flex" } }}>

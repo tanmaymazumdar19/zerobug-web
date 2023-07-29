@@ -1,6 +1,7 @@
 export const employeesArray = [
   {
     empName: "John",
+    age: 25,
     compName: "ABC Corp",
     role: ["Front End Dev"],
     techStack: ["React"],
@@ -15,6 +16,7 @@ export const employeesArray = [
   },
   {
     empName: "Jane",
+    age: 25,
     compName: "XYZ Inc",
     role: ["Front End Dev"],
     techStack: ["Angular"],
@@ -29,6 +31,7 @@ export const employeesArray = [
   },
   {
     empName: "Alex",
+    age: 25,
     compName: "123 Tech",
     role: ["Front End Dev"],
     techStack: ["React"],
@@ -43,6 +46,7 @@ export const employeesArray = [
   },
   {
     empName: "Mia",
+    age: 25,
     compName: "Top Solutions",
     role: ["Front End Dev"],
     techStack: ["Angular"],
@@ -57,6 +61,7 @@ export const employeesArray = [
   },
   {
     empName: "Chris",
+    age: 25,
     compName: "Innovate Co",
     role: ["Front End Dev"],
     techStack: ["React"],
@@ -71,6 +76,7 @@ export const employeesArray = [
   },
   {
     empName: "Olivia",
+    age: 25,
     compName: "Global Software",
     role: ["Front End Dev"],
     techStack: ["Angular"],
@@ -85,6 +91,7 @@ export const employeesArray = [
   },
   {
     empName: "Michael",
+    age: 25,
     compName: "ABC Corp",
     role: ["Front End Dev"],
     techStack: ["React"],
@@ -99,6 +106,7 @@ export const employeesArray = [
   },
   {
     empName: "Emily",
+    age: 25,
     compName: "XYZ Inc",
     role: ["Front End Dev"],
     techStack: ["Angular"],
@@ -113,6 +121,7 @@ export const employeesArray = [
   },
   {
     empName: "Daniel",
+    age: 25,
     compName: "123 Tech",
     role: ["Front End Dev"],
     techStack: ["Angular"],
@@ -127,6 +136,7 @@ export const employeesArray = [
   },
   {
     empName: "Sophia",
+    age: 25,
     compName: "Top Solutions",
     role: ["Front End Dev"],
     techStack: ["React"],

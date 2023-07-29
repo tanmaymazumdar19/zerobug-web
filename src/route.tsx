@@ -1,5 +1,6 @@
 import { JSXElementConstructor, ReactElement, lazy } from "react";
 import { Outlet, useRoutes } from "react-router-dom";
+import CompanyDetails from "./pages/Company/Details";
 
 const Layout = lazy(() => import("./components/Layout"));
 const Login = lazy(() => import("./pages/Login"));
@@ -18,7 +19,17 @@ export default function PublicRoutes(): ReactElement<
       children: [
         {
           path: "/admin",
-          element: <Admin />,
+          element: <Outlet />,
+          children: [
+            {
+              path: "",
+              element: <Admin />,
+            },
+            {
+              path: ":companyId",
+              element: <CompanyDetails />,
+            },
+          ],
         },
         {
           path: "/company",

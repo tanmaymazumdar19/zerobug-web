@@ -16,8 +16,8 @@ export const batchComponentStyle = {
   justifyContent: "center",
   borderRadius: "12px",
   outline: "none",
-  width: "90%",
-  maxWidth: "30rem",
+  width: "100%",
+  maxWidth: "35rem",
 };
 
 function CustomModal({ children }: any) {

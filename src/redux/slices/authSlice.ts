@@ -1,8 +1,6 @@
 import type { Slice } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-// import type { Slice } from '@reduxjs/toolkit'
-
 export interface AuthState {
   userToken: string;
   isAdmin: boolean;
