@@ -84,7 +84,7 @@ function AdminLoginPage() {
                   data?.email === "anshul@yopmail.com"
                     ? await tryAdminLogin({ body: data }).unwrap()
                     : await tryCompanyLogin({ body: data }).unwrap();
-                if (res?.status === 200) {
+                if (res?.status === 200 || res?.status === true) {
                   dispatch(
                     storeLoginToken({
                       token: res?.data.authToken,
