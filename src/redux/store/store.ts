@@ -11,7 +11,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import { api } from '../api/api'
+import { adminApis, companyApi } from '../api/api'
 import middleware from '../api/middleware'
 import rootReducer from '../rootReducer/rootReducer'
 
@@ -20,7 +20,7 @@ const persistConfig = {
   version: 1,
   storage,
   whitelist: ['authSlice'], // reducers which you want to persist
-  blacklist: [api.reducerPath], // reducers which you don't want to persist
+  blacklist: [adminApis.reducerPath, companyApi.reducerPath], // reducers which you don't want to persist
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -28,12 +28,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
   reducer: persistedReducer,
   ...middleware,
+  // @ts-ignore
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(api.middleware),
+    }).concat(adminApis.middleware).concat(companyApi.middleware),
 })
 
 export const persistor = persistStore(store)
