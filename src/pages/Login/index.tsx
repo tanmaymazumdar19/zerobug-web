@@ -76,7 +76,6 @@ function AdminLoginPage() {
                 Welcome to Talent Pool
               </Typography>
             </Stack>
-
             <StyledForm
               noValidate
               onSubmit={handleSubmit(async (data) => {
