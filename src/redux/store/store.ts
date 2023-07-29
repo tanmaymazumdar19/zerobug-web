@@ -12,7 +12,6 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import { adminApis, companyApi } from "../api/api";
-import middleware from "../api/middleware";
 import rootReducer from "../rootReducer/rootReducer";
 
 const persistConfig = {
@@ -27,14 +26,14 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  ...middleware,
-  middleware: (getDefaultMiddleware) =>
+  // @ts-ignore
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(adminApis.middleware, companyApi.middleware),
-});
+    }).concat(companyApi.middleware, adminApis.middleware),
+})
 
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
