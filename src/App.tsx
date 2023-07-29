@@ -1,9 +1,9 @@
-import { Suspense } from "react";
-import Routes from "./route";
-import { BrowserRouter as Router } from "react-router-dom";
-import Loader from "./components/Reuseable/Loader";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { Suspense } from 'react'
+import Routes from './route'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Loader from './components/Reuseable/Loader'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const App = () => {
   return (
     <>
@@ -14,7 +14,7 @@ const App = () => {
       </Router>
       <ToastContainer />
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

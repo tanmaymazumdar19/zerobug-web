@@ -8,13 +8,13 @@ export const adminApis = createApi({
     fetchCompaniesList: builder.query<any, any>({
       query: () => ({
         url: `https://talent-pool.onrender.com/admin-api/v1/get-companies?status=approved`,
-        method: 'GET'
-      })
+        method: 'GET',
+      }),
     }),
     adminLogin: builder.mutation<any, any>({
       query: (data: any) => ({
         url: `${adminApiRoot}/login`,
-        method: "POST",
+        method: 'POST',
         body: data.body,
       }),
     }),
@@ -28,7 +28,7 @@ export const companyApi = createApi({
     companyLogin: builder.mutation<any, any>({
       query: (data: any) => ({
         url: `${companyApiRoot}/login`,
-        method: "POST",
+        method: 'POST',
         body: data.body,
       }),
     }),

@@ -1,23 +1,23 @@
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { Stack, Box, Button } from "@mui/material";
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { Stack, Box, Button } from '@mui/material'
 
-import { StyledForm } from "../../Login/style";
-import { setShowModal } from "../../../redux/slices/modalSlice";
-import InputTypeTextAndEmail from "../../../components/Reuseable/Inputcomp";
+import { StyledForm } from '../../Login/style'
+import { setShowModal } from '../../../redux/slices/modalSlice'
+import InputTypeTextAndEmail from '../../../components/Reuseable/Inputcomp'
 
 const EmployeeDetails = ({ userDetails }: any) => {
   const defaultValues = {
-    empName: userDetails.empName || "",
-    empAge: userDetails.age || "",
-    empGender: userDetails.gender || "",
-    compName: userDetails.compName || "",
-    role: userDetails.role[0] || "",
-    techStack: userDetails.techStack[0] || "",
-    experience: userDetails.experience || "",
-    availability: userDetails.availability || "",
-    resume: userDetails.resume?.fileLinks || "",
-  };
+    empName: userDetails.empName || '',
+    empAge: userDetails.age || '',
+    empGender: userDetails.gender || '',
+    compName: userDetails.compName || '',
+    role: userDetails.role[0] || '',
+    techStack: userDetails.techStack[0] || '',
+    experience: userDetails.experience || '',
+    availability: userDetails.availability || '',
+    resume: userDetails.resume?.fileLinks || '',
+  }
 
   const {
     control,
@@ -25,27 +25,27 @@ const EmployeeDetails = ({ userDetails }: any) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ defaultValues });
+  } = useForm({ defaultValues })
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleModalClose = () => {
-    dispatch(setShowModal(false));
-  };
+    dispatch(setShowModal(false))
+  }
 
   return (
     <Stack spacing={2}>
       <StyledForm
         noValidate
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-          reset();
+        onSubmit={handleSubmit(data => {
+          console.log(data)
+          reset()
         })}
       >
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="empName"
-          label="Employee Name"
+          type='text'
+          registerWith='empName'
+          label='Employee Name'
           control={control}
           register={register}
           isError={!!errors?.empName?.message}
@@ -53,9 +53,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="empAge"
-          label="Employee Age"
+          type='text'
+          registerWith='empAge'
+          label='Employee Age'
           control={control}
           register={register}
           isError={!!errors?.empAge?.message}
@@ -63,9 +63,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="empGender"
-          label="Employee Gender"
+          type='text'
+          registerWith='empGender'
+          label='Employee Gender'
           control={control}
           register={register}
           isError={!!errors?.empGender?.message}
@@ -73,9 +73,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="compName"
-          label="Company Name"
+          type='text'
+          registerWith='compName'
+          label='Company Name'
           control={control}
           register={register}
           isError={!!errors?.compName?.message}
@@ -83,9 +83,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="role"
-          label="Role"
+          type='text'
+          registerWith='role'
+          label='Role'
           control={control}
           register={register}
           isError={!!errors?.role?.message}
@@ -93,9 +93,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="techStack"
-          label="Tech Stack"
+          type='text'
+          registerWith='techStack'
+          label='Tech Stack'
           control={control}
           register={register}
           isError={!!errors?.techStack?.message}
@@ -103,9 +103,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="experience"
-          label="Experience"
+          type='text'
+          registerWith='experience'
+          label='Experience'
           control={control}
           register={register}
           isError={!!errors?.experience?.message}
@@ -113,9 +113,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="availability"
-          label="Availability"
+          type='text'
+          registerWith='availability'
+          label='Availability'
           control={control}
           register={register}
           isError={!!errors?.availability?.message}
@@ -123,9 +123,9 @@ const EmployeeDetails = ({ userDetails }: any) => {
         />
 
         <InputTypeTextAndEmail
-          type="text"
-          registerWith="resume"
-          label="Resume"
+          type='text'
+          registerWith='resume'
+          label='Resume'
           control={control}
           register={register}
           isError={!!errors?.resume?.message}
@@ -134,26 +134,26 @@ const EmployeeDetails = ({ userDetails }: any) => {
 
         <Box
           sx={{
-            display: "flex",
-            gap: "1rem",
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
+            display: 'flex',
+            gap: '1rem',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
 
             button: {
-              borderRadius: "8px",
+              borderRadius: '8px',
             },
           }}
         >
-          <Button variant="outlined" onClick={handleModalClose}>
+          <Button variant='outlined' onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button variant="contained" type="submit" disableElevation>
+          <Button variant='contained' type='submit' disableElevation>
             Submit
           </Button>
         </Box>
       </StyledForm>
     </Stack>
-  );
-};
+  )
+}
 
-export default EmployeeDetails;
+export default EmployeeDetails

@@ -1,15 +1,15 @@
-import CircularProgress from "@mui/material/CircularProgress";
-import { styled } from "styled-components";
+import CircularProgress from '@mui/material/CircularProgress'
+import { styled } from 'styled-components'
 
 function Loader() {
   return (
     <LoaderContainer>
       <CircularProgress />
     </LoaderContainer>
-  );
+  )
 }
 
-export default Loader;
+export default Loader
 
 const LoaderContainer = styled.div`
   position: absolute;
@@ -18,4 +18,4 @@ const LoaderContainer = styled.div`
   transform: translate(-50%, -50%);
   background-color: transparent;
   z-index: 9998;
-`;
+`
