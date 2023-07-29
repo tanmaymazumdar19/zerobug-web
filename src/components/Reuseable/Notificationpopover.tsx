@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Popover, Typography } from "@mui/material";
+import { Box, Divider, Popover, Typography } from "@mui/material";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 
 const Notificationpopover = ({

@@ -2,21 +2,9 @@ import React from "react";
 import home1 from "../../assets/home1.webp";
 import home2 from "../../assets/home2.webp";
 import home3 from "../../assets/home3.webp";
-import { Button, IconButton, Snackbar, TextField } from "@mui/material";
-// import Textarea from "@mui/joy/Textarea";
+import { Snackbar, TextField } from "@mui/material";
 function Home() {
   const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  // const handleClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setOpen(false);
-  // };
   return (
     <>
       <div className="homeMainContainer">
