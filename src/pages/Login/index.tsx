@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { storeLoginToken } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../../redux/api/api";
+import { useAdminLoginMutation, useCompanyLoginMutation } from "../../redux/api/api";
 
 const StyledForm = styled.form`
   label {
@@ -36,7 +36,8 @@ const email = "email";
 function AdminLoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [tryLogin] = useLoginMutation()
+  const [tryAdminLogin] = useAdminLoginMutation()
+  const [tryCompanyLogin] = useCompanyLoginMutation()
   const {
     watch,
     control,
@@ -47,7 +48,7 @@ function AdminLoginPage() {
   } = useForm({ defaultValues });
 
   const loginSectionStyle = {
-    backgroundColor: "#b6f0f633",
+    // backgroundColor: "#b6f0f633",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -65,6 +66,7 @@ function AdminLoginPage() {
     backgroundColor: "white",
     borderRadius: "12px",
     overflow: "hidden",
+    border: '2px solid #333'
   };
 
   return (
@@ -81,14 +83,14 @@ function AdminLoginPage() {
                   fontWeight: "var(--font600)",
                 }}
               >
-                Admin Login
+                Welcome to Talent Pool
               </Typography>
             </Stack>
 
             <StyledForm
               noValidate
               onSubmit={handleSubmit(async (data) => {
-                const res: any = await tryLogin({body: data}).unwrap()
+                const res: any = data?.email === "anshul@yopmail.com" ? await tryAdminLogin({body: data}).unwrap() : await tryCompanyLogin({body: data}).unwrap()
                 if (res?.status === 200) {
                   dispatch(
                     storeLoginToken({
