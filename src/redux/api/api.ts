@@ -28,7 +28,7 @@ export const adminApis = createApi({
 });
 
 export const companyApi = createApi({
-  reducerPath: "api",
+  reducerPath: 'companyApi',
   baseQuery: companyBaseQuery,
   tagTypes: ["Posts"], // provide tags here whose api data you want to cache
   endpoints: (builder) => ({
