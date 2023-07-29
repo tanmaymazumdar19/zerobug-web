@@ -10,7 +10,7 @@ export const adminBaseQuery = fetchBaseQuery({
   prepareHeaders: (headers: any, { getState }: any) => {
     const token: any = (getState() as RootState).authSlice.userToken
     if (token) {
-      headers.set('AuthorizationToken', token)
+      headers.set(`Authorization`, `Bearer ${token}`)
     }
     return headers
   },

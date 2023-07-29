@@ -1,21 +1,15 @@
-import {
-  adminApiRoot,
-  adminBaseQuery,
-  companyApiRoot,
-  companyBaseQuery,
-} from "../../global";
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { adminBaseQuery, companyBaseQuery, adminApiRoot, companyApiRoot } from '../../global'
+import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const adminApis = createApi({
-  reducerPath: "api",
+  reducerPath: 'adminApi',
   baseQuery: adminBaseQuery,
-  tagTypes: ["Posts"], // provide tags here whose api data you want to cache
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     fetchCompaniesList: builder.query<any, any>({
       query: () => ({
-        url: `${adminApiRoot}/get-companies?status=approved`,
-        method: "GET",
-      }),
+        url: `https://talent-pool.onrender.com/admin-api/v1/get-companies?status=approved`,
+        method: 'GET'
+      })
     }),
     adminLogin: builder.mutation<any, any>({
       query: (data: any) => ({
@@ -25,13 +19,12 @@ export const adminApis = createApi({
       }),
     }),
   }),
-});
+})
 
 export const companyApi = createApi({
-  reducerPath: "api",
+  reducerPath: 'companyApi',
   baseQuery: companyBaseQuery,
-  tagTypes: ["Posts"], // provide tags here whose api data you want to cache
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     companyLogin: builder.mutation<any, any>({
       query: (data: any) => ({
         url: `${companyApiRoot}/login`,
@@ -40,7 +33,7 @@ export const companyApi = createApi({
       }),
     }),
   }),
-});
+})
 
-export const { useFetchCompaniesListQuery, useAdminLoginMutation } = adminApis;
-export const { useCompanyLoginMutation } = companyApi;
+export const { useFetchCompaniesListQuery, useAdminLoginMutation } = adminApis
+export const { useCompanyLoginMutation } = companyApi
