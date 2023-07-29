@@ -83,10 +83,10 @@ export default function GetHired() {
       </Box>
       <Box mb={3}>
         <CustomTypography>
-          Company Name : <b>{data?.data?.name}</b>
+          Company Name : <b>{data?.data?.name || companyDetails[0].companyName}</b>
         </CustomTypography>
         <CustomTypography>
-          Company Email : <b>{data?.data?.email}</b>
+          Company Email : <b>{data?.data?.email || companyDetails[0].companyEmail}</b>
         </CustomTypography>
         <CustomTypography>
           Company Description : <b>{companyDetails[0].companyDesc}</b>
@@ -95,10 +95,10 @@ export default function GetHired() {
           Company Established : <b>{companyDetails[0].companyEstd}</b>
         </CustomTypography> */}
         <CustomTypography>
-          Company Size : <b>{data?.data?.size}</b>
+          Company Size : <b>{data?.data?.size || companyDetails[0].companyStrength}</b>
         </CustomTypography>
         <CustomTypography>
-          Tech Stack : <b>{data?.data?.domain?.join(', ')}</b>
+          Tech Stack : <b>{data?.data?.domain?.join(', ') || companyDetails[0].techStack}</b>
         </CustomTypography>
       </Box>
 
